@@ -2,9 +2,8 @@ const cats = [
   { name: "cat1", price:"100$"},
   { name: "cat2", price:"200$"},
   { name: "cat3", price:"300$"},
-  { name: "cat4", price:"400$"},
-
-]
+  { name: "cat4"},
+];
 
 const $goodsList = document.querySelector('.listing');
 
@@ -21,8 +20,10 @@ const renderItem = ({name = "cat", price ="Call to learn the price"}) => {
 };
 
 const renderItemList = (list) => {
-  let goodsList = list.map(item => renderItem(item));
-  $goodsList.insertAdjacentHTML('beforeend', goodsList);
+  var item_list = '';
+  list.forEach(item => item_list+=renderItem(item));
+  console.log (item_list);
+  $goodsList.insertAdjacentHTML('beforeend', item_list);
 }
 
 renderItemList(cats);
