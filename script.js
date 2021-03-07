@@ -7,7 +7,7 @@ const cats = [
 
 
 class Cat{
-  constructor(name, price, img ="images/cat_image1.jpg", info = "lorem", quantity = 0) {
+  constructor({name, price, img ="images/cat_image1.jpg", info = "lorem", quantity = 0}) {
     this.name = name;
     this.price = price;
     this.img = img;
@@ -42,7 +42,7 @@ class Basket {
   }
 
   addToBasket(item, quantity = 1){
-    let i = this.items.findIndex(element => return element.id == item.id);
+    let i = this.items.findIndex(element => element.id == item.id);
     if (i) {
       this.items[i].quantity += quantity;
     } 
@@ -54,12 +54,12 @@ class Basket {
     this.updatePrice();
   }
 
-  updatePrice (){
+  updatePrice(){
     //TODO: update price on web page
   }
 
   removeFromBasket(item, quantity = -1){
-    let i = this.items.findIndex(element => return element.id == item.id);
+    let i = this.items.findIndex(element => element.id == item.id);
     let resultRemoval = quantity;
     let oldQuantity = this.items[i].quantity;
     let oldPrice = this.items[i].price;
@@ -75,12 +75,12 @@ class Basket {
   }
 
 
-  recalculatePrice()={
+  recalculatePrice(){
     var result = 0;
     this.items.forEach(item => result += item.price * item.quantity);
     return result;
   }
-  
+
 }
 
 const $goodsList = document.querySelector('.listing');
@@ -88,7 +88,10 @@ const $goodsList = document.querySelector('.listing');
 
 const renderItemList = (list) => {
   var item_list = '';
-  list.forEach(item => item_list+=renderItem(item));
+  list.forEach(item => {
+    let currentCat = new Cat(item)
+    item_list+=currentCat.renderItem();
+  });
   console.log (item_list);
   $goodsList.insertAdjacentHTML('beforeend', item_list);
 }
